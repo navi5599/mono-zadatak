@@ -14,21 +14,27 @@ function HomePage() {
     <div className="container">
       {globalStore.cars.map((car, id) => {
         return (
-          <div className="models_card" key={id}>
-            <h4>{car.abbrv}</h4>
-            <Link to="/models">
-              <button onClick={() => globalStore.getModels(car.id)}>
-                show
-              </button>
-            </Link>
-          </div>
+          <Link
+            to="/models"
+            style={{ textDecoration: 'none', color: 'inherit' }}
+          >
+            <div
+              className="models_card"
+              key={id}
+              onClick={() => globalStore.getModels(car.id)}
+            >
+              <h4>{car.abbrv}</h4>
+
+              <img className="logo_image" src={car.logo} alt="cars"></img>
+            </div>
+          </Link>
         );
       })}
 
-      <div className="allmodels_card">
+      <div className="models_card">
         <h4>All Models</h4>
         <Link to="/models">
-          <button onClick={() => globalStore.getModels('all')}>show</button>
+          <button onClick={() => globalStore.getModels('all')}>Showcar</button>
         </Link>
       </div>
     </div>

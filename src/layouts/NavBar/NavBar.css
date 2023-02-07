@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Play&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Noto+Serif+JP:wght@500&family=Play&display=swap');
+
+.navbar {
+  width: 100%;
+  height: 80px;
+  background: linear-gradient(to right, #141e30, #243b55);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h3,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+h3 {
+  font-family: 'Play', sans-serif;
+  color: aliceblue;
+  font-size: 40px;
+}
+
+h3:hover {
+  cursor: pointer;
+}
+
+p {
+  font-family: 'Noto Serif JP', serif;
+  color: aliceblue;
+  margin-bottom: 10px;
+  cursor: default;
+}
