@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.models_card {
+  width: 150px;
+  height: 150px;
+  border: 2px solid black;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.allmodels_card {
+  width: 150px;
+  height: 150px;
+  border: 2px solid black;
+  text-align: center;
+  margin-top: 50px;
+}
