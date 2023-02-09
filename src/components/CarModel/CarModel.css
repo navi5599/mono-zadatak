@@ -1,0 +1,26 @@
+.card {
+  width: 350px;
+  height: 350px;
+  border: 2px solid black;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.card p {
+  font-size: 12px;
+}
+
+.text_card {
+  max-width: 450px;
+  height: 450px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+img {
+  max-width: 350px;
+}
+
+.car_model_container {
+  height: 100%;
+}

@@ -2,12 +2,50 @@
   background-color: #141e30;
   color: aliceblue;
   width: 200px;
-  height: 90vh;
+  min-height: 100%;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 h4 {
   margin: 0;
   text-align: center;
+}
+
+.search_input {
+  margin-top: 5px;
+  height: 25px;
+  border-radius: 5px;
+}
+
+.search_input:focus {
+  outline: none !important;
+  box-shadow: 0 0 10px #719ece;
+}
+
+.filter_section {
+  display: flex;
+  flex-direction: column;
+  margin-top: 150px;
+}
+
+.filter_section button {
+  cursor: pointer;
+  font: inherit;
+  outline: #141e30;
+  border: none;
+  width: 145px;
+  color: #141e30;
+  font-weight: bold;
+  margin: 10px;
+  height: 28px;
+  border-radius: 5px;
+}
+
+.dropdown_filter {
+  height: 20px !important;
+  margin: 10px !important;
 }

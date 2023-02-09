@@ -1,14 +1,19 @@
 .container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 15px 1fr 15px 1fr 15px 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-gap: 15px;
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 50px;
   min-height: 80vh;
 }
 .models_card {
   width: 150px;
   height: 150px;
   text-align: center;
-  margin-top: 50px;
+
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   border-radius: 10px;
   transition: ease-in-out 0.23s;
@@ -21,4 +26,24 @@
 .logo_image {
   max-width: 100px;
   margin-top: 10px;
+}
+
+.allmodels_button {
+  margin-top: 50px;
+  outline: 0;
+  border: 1px solid #243b55;
+  background-color: white;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 4px;
+  font-size: 14px;
+  height: 30px;
+  padding: 0px 15px;
+  text-shadow: rgb(0 0 0 / 25%) 0px 3px 8px;
+  transition: all 0.5s ease 0s;
+}
+
+.allmodels_button:hover {
+  background: linear-gradient(to right, #141e30, #243b55);
+  color: aliceblue;
 }

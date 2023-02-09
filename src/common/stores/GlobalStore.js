@@ -22,7 +22,9 @@ class GlobalStore {
   };
 
   getModels = (id) => {
-    getModelsData(id);
+    runInAction(() => {
+      getModelsData(id);
+    });
   };
 }
 

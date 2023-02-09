@@ -12,15 +12,19 @@ function HomePage() {
 
   return (
     <div className="container">
-      {globalStore.cars.map((car, id) => {
+      {globalStore.cars.map((car) => {
         return (
           <Link
+            key={car.id}
             to="/models"
-            style={{ textDecoration: 'none', color: 'inherit' }}
+            style={{
+              textDecoration: 'none',
+              color: 'inherit',
+              height: '150px',
+            }}
           >
             <div
               className="models_card"
-              key={id}
               onClick={() => globalStore.getModels(car.id)}
             >
               <h4>{car.abbrv}</h4>
@@ -34,7 +38,12 @@ function HomePage() {
       <div className="models_card">
         <h4>All Models</h4>
         <Link to="/models">
-          <button onClick={() => globalStore.getModels('all')}>Showcar</button>
+          <button
+            className="allmodels_button"
+            onClick={() => globalStore.getModels('all')}
+          >
+            All models
+          </button>
         </Link>
       </div>
     </div>
