@@ -1,9 +1,12 @@
 .card {
   width: 350px;
-  height: 350px;
-  border: 2px solid black;
+  height: 390px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  border-radius: 10px;
+  transition: ease-in-out 0.23s;
   text-align: center;
   margin-top: 50px;
+  margin-bottom: 20px;
 }
 
 .card p {
@@ -18,9 +21,18 @@
 }
 
 img {
-  max-width: 350px;
+  max-width: 330px;
+  border-radius: 10px;
 }
 
 .car_model_container {
   height: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 15px 1fr 15px 1fr 15px 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-gap: 15px;
+  width: 60%;
+  margin: 0 auto;
+  margin-bottom: 100px;
 }

@@ -25,25 +25,9 @@
 
 .logo_image {
   max-width: 100px;
-  margin-top: 10px;
 }
 
-.allmodels_button {
-  margin-top: 50px;
-  outline: 0;
-  border: 1px solid #243b55;
-  background-color: white;
-  cursor: pointer;
-  font-weight: 500;
-  border-radius: 4px;
-  font-size: 14px;
-  height: 30px;
-  padding: 0px 15px;
-  text-shadow: rgb(0 0 0 / 25%) 0px 3px 8px;
-  transition: all 0.5s ease 0s;
-}
-
-.allmodels_button:hover {
-  background: linear-gradient(to right, #141e30, #243b55);
-  color: aliceblue;
+.allmodels_btn {
+  margin: 0 !important;
+  margin-top: 10px !important;
 }

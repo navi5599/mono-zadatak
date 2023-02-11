@@ -1,14 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './CarModelsPage.css';
 
+import globalStore from '../../common/stores/GlobalStore';
+
 import SideBar from '../../layouts/SideBar/SideBar';
-// import CarModel from '../../components/CarModel/CarModel';
+import CarModel from '../../components/CarModel/CarModel';
+import Button from '../../components/Button/Button';
 
 function CarModelsPage() {
+  const carId = localStorage.getItem('carId');
+
+  useEffect(() => {
+    globalStore.getModels(carId);
+  }, [carId]);
+
   return (
     <div className="card_models_container">
       <SideBar />
-      {/* <CarModel /> */}
+      <Link to="/" style={{ textDecoration: 'none' }}>
+        <Button
+          value="Go back"
+          className="centered_button"
+          onClickHandler={() => (globalStore.setPage = 2)}
+        />
+      </Link>
+
+      <CarModel />
     </div>
   );
 }

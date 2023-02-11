@@ -3,3 +3,9 @@
   flex-direction: row;
   min-height: 100vh;
 }
+
+.centered_button {
+  position: absolute;
+  top: 135px;
+  right: 60px;
+}

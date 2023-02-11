@@ -9,6 +9,7 @@ function SideBar() {
     <div className="sidebar">
       <h4>Search</h4>
       <input
+        placeholder="Search model name .."
         className="search_input"
         onChange={(e) => (sidebarStore.searchedCar = e.target.value)}
       ></input>
@@ -16,15 +17,27 @@ function SideBar() {
         <button onClick={() => sidebarStore.handleFilter()}>Filter</button>
         {sidebarStore.showFilter ? (
           <>
-            <button className="dropdown_filter">Filter</button>
-            <button className="dropdown_filter">Filter</button>
-            <button className="dropdown_filter">Filter</button>
+            <button className="dropdown_filter">Motortype</button>
+            <button className="dropdown_filter">Price</button>
           </>
         ) : (
           ''
         )}
 
-        <button className="sort_button">Sort</button>
+        <button
+          className="sort_button"
+          onClick={() => sidebarStore.handleSort()}
+        >
+          Sort
+        </button>
+        {sidebarStore.showSort ? (
+          <>
+            <button className="dropdown_filter">By Name</button>
+            <button className="dropdown_filter">By Price</button>
+          </>
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );

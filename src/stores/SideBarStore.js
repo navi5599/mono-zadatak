@@ -9,12 +9,18 @@ class SideBarStore {
     makeObservable(this, {
       searchedCar: observable,
       showFilter: observable,
+      showSort: observable,
       handleFilter: action,
+      handleSort: action,
     });
   }
 
   handleFilter = () => {
     this.showFilter = !this.showFilter;
+  };
+
+  handleSort = () => {
+    this.showSort = !this.showSort;
   };
 }
 
