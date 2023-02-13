@@ -19,13 +19,11 @@ export const getCarsData = () => {
 export const getModelsData = (id) => {
   let modelsUrl =
     'https://api.baasic.com/beta/myapp-test/resources/VehicleModel';
-  console.log(globalStore.showLoadButton);
-  console.log(id);
+
   if (id === 'all') {
     modelsUrl = 'https://api.baasic.com/beta/myapp-test/resources/VehicleModel';
     //Show the load more button, because we got more than 5 models to show
     globalStore.showLoadButton = true;
-    console.log(globalStore.showLoadButton);
   } else {
     modelsUrl += `?searchQuery=WHERE vehiclemakeid = '${id}'`;
     globalStore.showLoadButton = false;
@@ -62,4 +60,29 @@ export const getNewModelsData = () => {
   }
 
   globalStore.setPage++;
+};
+
+//Sort models by name ---
+
+export const sortModelsByName = (sortType) => {
+  let url = 'https://api.baasic.com/beta/myapp-test/resources/VehicleModel';
+
+  const carId = localStorage.getItem('carId');
+
+  if (carId === 'all') {
+    url += `?sort=name|${sortType}`;
+  } else {
+    url += `?searchQuery=WHERE vehiclemakeid ='${carId}'&sort=name|${sortType}`;
+  }
+
+  axios
+    .get(url)
+    .then((res) => {
+      globalStore.models = res.data.item;
+      console.log('sorteditems');
+      console.log(res.data.item);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };

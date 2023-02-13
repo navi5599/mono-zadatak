@@ -2,6 +2,7 @@ import { observable, action, makeObservable, runInAction } from 'mobx';
 import { getCarsData } from '../services/fetchApiData';
 import { getModelsData } from '../services/fetchApiData';
 import { getNewModelsData } from '../services/fetchApiData';
+import { sortModelsByName } from '../services/fetchApiData';
 
 class GlobalStore {
   cars = [];
@@ -18,6 +19,7 @@ class GlobalStore {
       getCars: action,
       getModels: action,
       getNewModels: action,
+      getModelsByName: action,
     });
   }
 
@@ -33,6 +35,10 @@ class GlobalStore {
 
   getNewModels = () => {
     getNewModelsData();
+  };
+
+  getModelsByName = (sortType) => {
+    sortModelsByName(sortType);
   };
 }
 
