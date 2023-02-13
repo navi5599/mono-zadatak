@@ -47,7 +47,20 @@
 }
 
 .dropdown_filter {
-  height: 20px !important;
-  margin: 10px !important;
+  background-color: #314974 !important;
+  color: aliceblue !important;
+  transition: all 0.33s ease 0s;
+}
+
+.dropdown_filter:hover {
+  background-color: #4570c0 !important;
+}
+
+.options_button {
   font-size: small !important;
+  font-weight: 500 !important;
+}
+
+.options_button:hover {
+  font-weight: 700 !important;
 }

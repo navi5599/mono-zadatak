@@ -14,11 +14,13 @@ function SideBar() {
         onChange={(e) => (sidebarStore.searchedCar = e.target.value)}
       ></input>
       <div className="filter_section">
-        <button onClick={() => sidebarStore.handleFilter()}>Filter</button>
+        <button onClick={() => sidebarStore.handleFilterAndSort('filter')}>
+          Filter
+        </button>
         {sidebarStore.showFilter ? (
           <>
-            <button className="dropdown_filter">Motortype</button>
-            <button className="dropdown_filter">Price</button>
+            <button className="dropdown_filter">By Motorype</button>
+            <button className="dropdown_filter">By Price</button>
           </>
         ) : (
           ''
@@ -26,14 +28,51 @@ function SideBar() {
 
         <button
           className="sort_button"
-          onClick={() => sidebarStore.handleSort()}
+          onClick={() => sidebarStore.handleFilterAndSort('sort')}
         >
           Sort
         </button>
         {sidebarStore.showSort ? (
           <>
-            <button className="dropdown_filter">By Name</button>
-            <button className="dropdown_filter">By Price</button>
+            <button
+              onClick={() => sidebarStore.handleSortOptions('sort_name')}
+              className="dropdown_filter"
+            >
+              By Name
+            </button>
+            {sidebarStore.showNameOptionSort ? (
+              <>
+                <button className="options_button">Ascending</button>
+                <button className="options_button">Descending</button>
+              </>
+            ) : (
+              ''
+            )}
+
+            <button
+              onClick={() => sidebarStore.handleSortOptions('price_name')}
+              className="dropdown_filter"
+            >
+              By Price
+            </button>
+            {sidebarStore.showPriceOptionSort ? (
+              <>
+                <button
+                  onClick={() => sidebarStore.sortModels('asce')}
+                  className="options_button"
+                >
+                  Ascending
+                </button>
+                <button
+                  onClick={() => sidebarStore.sortModels('desc')}
+                  className="options_button"
+                >
+                  Descending
+                </button>
+              </>
+            ) : (
+              ''
+            )}
           </>
         ) : (
           ''
