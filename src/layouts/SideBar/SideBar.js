@@ -1,6 +1,8 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
+
 import sidebarStore from '../../stores/SideBarStore';
+import globalStore from '../../common/stores/GlobalStore';
 
 import './SideBar.css';
 
@@ -42,8 +44,18 @@ function SideBar() {
             </button>
             {sidebarStore.showNameOptionSort ? (
               <>
-                <button className="options_button">Ascending</button>
-                <button className="options_button">Descending</button>
+                <button
+                  onClick={() => globalStore.getModelsByName('asc')}
+                  className="options_button"
+                >
+                  Ascending
+                </button>
+                <button
+                  onClick={() => globalStore.getModelsByName('desc')}
+                  className="options_button"
+                >
+                  Descending
+                </button>
               </>
             ) : (
               ''
