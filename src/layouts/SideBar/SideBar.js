@@ -1,4 +1,5 @@
 import React from 'react';
+import { AiFillCheckSquare } from 'react-icons/ai';
 import { observer } from 'mobx-react-lite';
 
 import sidebarStore from '../../stores/SideBarStore';
@@ -11,84 +12,135 @@ function SideBar() {
     <div className="sidebar">
       <h4>Search</h4>
       <input
-        placeholder="Search model name .."
         className="search_input"
         onChange={(e) => (sidebarStore.searchedCar = e.target.value)}
       ></input>
       <div className="filter_section">
-        <button onClick={() => sidebarStore.handleFilterAndSort('filter')}>
-          Filter
-        </button>
-        {sidebarStore.showFilter ? (
-          <>
-            <button className="dropdown_filter">By Motorype</button>
-            <button className="dropdown_filter">By Price</button>
-          </>
-        ) : (
-          ''
-        )}
-
-        <button
-          className="sort_button"
-          onClick={() => sidebarStore.handleFilterAndSort('sort')}
+        <h4>Sort</h4>
+        <div
+          onMouseEnter={() => sidebarStore.toggleOptions('name_opt')}
+          onMouseLeave={() => sidebarStore.toggleOptions('name_opt')}
+          className={`sort_div ${sidebarStore.showNameOptions ? 'show' : ''}`}
         >
-          Sort
-        </button>
-        {sidebarStore.showSort ? (
-          <>
-            <button
-              onClick={() => sidebarStore.handleSortOptions('sort_name')}
-              className="dropdown_filter"
-            >
-              By Name
-            </button>
-            {sidebarStore.showNameOptionSort ? (
-              <>
-                <button
-                  onClick={() => globalStore.getModelsByName('asc')}
-                  className="options_button"
-                >
-                  Ascending
-                </button>
-                <button
-                  onClick={() => globalStore.getModelsByName('desc')}
-                  className="options_button"
-                >
-                  Descending
-                </button>
-              </>
+          <h4>
+            By name{' '}
+            {globalStore.lockAscOptions || globalStore.lockDescOptions ? (
+              <AiFillCheckSquare className="icon" />
             ) : (
               ''
             )}
+          </h4>
 
-            <button
-              onClick={() => sidebarStore.handleSortOptions('price_name')}
-              className="dropdown_filter"
-            >
-              By Price
-            </button>
-            {sidebarStore.showPriceOptionSort ? (
-              <>
-                <button
-                  onClick={() => sidebarStore.sortModels('asce')}
-                  className="options_button"
-                >
-                  Ascending
-                </button>
-                <button
-                  onClick={() => sidebarStore.sortModels('desc')}
-                  className="options_button"
-                >
-                  Descending
-                </button>
-              </>
+          {sidebarStore.showNameOptions ? (
+            <>
+              <h5
+                onClick={() => globalStore.getModelsByName('asc')}
+                className={`options ${
+                  globalStore.lockAscOptions ? 'confirmed_asc' : ''
+                }`}
+              >
+                Ascending
+              </h5>
+              <h5
+                onClick={() => globalStore.getModelsByName('desc')}
+                className={`options ${
+                  globalStore.lockDescOptions ? 'confirmed_asc' : ''
+                }`}
+              >
+                Descending
+              </h5>
+            </>
+          ) : (
+            ''
+          )}
+        </div>
+
+        <div
+          onMouseEnter={() => sidebarStore.toggleOptions('price_opt')}
+          onMouseLeave={() => sidebarStore.toggleOptions('price_opt')}
+          className={`sort_div ${sidebarStore.showPriceOptions ? 'show' : ''}`}
+        >
+          <h4>
+            By price{' '}
+            {sidebarStore.lockAscPriceOptions ||
+            sidebarStore.lockDescPriceOptions ? (
+              <AiFillCheckSquare className="icon" />
             ) : (
               ''
             )}
-          </>
-        ) : (
-          ''
-        )}
+          </h4>
+          {sidebarStore.showPriceOptions ? (
+            <>
+              <h5
+                onClick={() => sidebarStore.sortModels('asc')}
+                className={`options ${
+                  sidebarStore.lockAscPriceOptions ? 'confirmed_asc' : ''
+                }`}
+              >
+                Ascending
+              </h5>
+              <h5
+                onClick={() => sidebarStore.sortModels('desc')}
+                className={`options ${
+                  sidebarStore.lockDescPriceOptions ? 'confirmed_asc' : ''
+                }`}
+              >
+                Descending
+              </h5>
+            </>
+          ) : (
+            ''
+          )}
+        </div>
+
+        <h4>Filter</h4>
+        <div
+          onMouseEnter={() => sidebarStore.toggleOptions('motortype_opt')}
+          onMouseLeave={() => sidebarStore.toggleOptions('motortype_opt')}
+          className={`sort_div ${
+            sidebarStore.showMotortypeOptions ? 'show_filter' : ''
+          }`}
+        >
+          <h4>
+            By MotorType{' '}
+            {sidebarStore.lockAscPriceOptions ||
+            sidebarStore.lockDescPriceOptions ? (
+              <AiFillCheckSquare className="icon" />
+            ) : (
+              ''
+            )}
+          </h4>
+          {sidebarStore.showMotortypeOptions ? (
+            <>
+              <h5
+                onClick={() => sidebarStore.sortModels('benzin')}
+                className={`options ${
+                  sidebarStore.lockAscPriceOptions ? 'confirmed_asc' : ''
+                }`}
+              >
+                Benzin
+              </h5>
+              <h5
+                onClick={() => sidebarStore.sortModels('diesel')}
+                className={`options ${
+                  sidebarStore.lockDescPriceOptions ? 'confirmed_asc' : ''
+                }`}
+              >
+                Diesel
+              </h5>
+              <h5
+                onClick={() => sidebarStore.sortModels('hybrid')}
+                className={`options ${
+                  sidebarStore.lockDescPriceOptions ? 'confirmed_asc' : ''
+                }`}
+              >
+                Hybrid
+              </h5>
+            </>
+          ) : (
+            ''
+          )}
+        </div>
       </div>
     </div>
   );

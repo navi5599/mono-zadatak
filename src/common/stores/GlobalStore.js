@@ -10,12 +10,18 @@ class GlobalStore {
   showLoadButton = false;
   setPage = 2;
 
+  lockAscOptions = false;
+  lockDescOptions = false;
+
   constructor() {
     makeObservable(this, {
       cars: observable,
       models: observable,
       showLoadButton: observable,
       setPage: observable,
+      lockAscOptions: observable,
+      lockDescOptions: observable,
+
       getCars: action,
       getModels: action,
       getNewModels: action,
@@ -39,6 +45,14 @@ class GlobalStore {
 
   getModelsByName = (sortType) => {
     sortModelsByName(sortType);
+    if (sortType === 'asc') {
+      this.lockAscOptions = true;
+      this.lockDescOptions = false;
+    }
+    if (sortType === 'desc') {
+      this.lockAscOptions = false;
+      this.lockDescOptions = true;
+    }
   };
 }
 

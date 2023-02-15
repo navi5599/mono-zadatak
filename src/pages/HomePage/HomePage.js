@@ -6,11 +6,22 @@ import { Link } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 
 import globalStore from '../../common/stores/GlobalStore';
+import sidebarStore from '../../stores/SideBarStore';
 
 function HomePage() {
+  //Use to reset states on 'go back' button
+  const resetStates = () => {
+    globalStore.setPage = 2;
+    globalStore.lockAscOptions = false;
+    globalStore.lockDescOptions = false;
+    globalStore.showLoadButton = false;
+    sidebarStore.lockAscPriceOptions = false;
+    sidebarStore.lockDescPriceOptions = false;
+  };
+
   useEffect(() => {
     globalStore.getCars();
-    globalStore.showLoadButton = false;
+    resetStates();
   }, []);
 
   return (

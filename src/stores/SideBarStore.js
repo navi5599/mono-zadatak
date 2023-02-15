@@ -7,7 +7,7 @@ const sortModelsByPrice = (sortType) => {
   const sortedModels = currentModels.sort((a, b) => {
     let priceA = parseInt(a.price);
     let priceB = parseInt(b.price);
-    if (sortType === 'asce') {
+    if (sortType === 'asc') {
       return priceA - priceB;
     } else if (sortType === 'desc') {
       return priceB - priceA;
@@ -22,40 +22,48 @@ const sortModelsByPrice = (sortType) => {
 
 class SideBarStore {
   searchedCar = '';
+  showNameOptions = false;
+  showPriceOptions = false;
+  showMotortypeOptions = false;
 
-  showFilter = false;
-  showSort = false;
-
-  showNameOptionSort = false;
-  showPriceOptionSort = false;
+  lockAscPriceOptions = false;
+  lockDescPriceOptions = false;
 
   constructor() {
     makeObservable(this, {
       searchedCar: observable,
-      showFilter: observable,
-      showSort: observable,
-      showNameOptionSort: observable,
-      showPriceOptionSort: observable,
-      handleFilterAndSort: action,
-      handleSortOptions: action,
+      showNameOptions: observable,
+      showPriceOptions: observable,
+      lockAscPriceOptions: observable,
+      lockDescPriceOptions: observable,
+      showMotortypeOptions: observable,
       sortModels: action,
+      toggleOptions: action,
     });
   }
 
-  handleSortOptions = (id) => {
-    if (id === 'sort_name')
-      return (this.showNameOptionSort = !this.showNameOptionSort);
-    if (id === 'price_name')
-      return (this.showPriceOptionSort = !this.showPriceOptionSort);
-  };
-
-  handleFilterAndSort = (id) => {
-    if (id === 'filter') return (this.showFilter = !this.showFilter);
-    if (id === 'sort') return (this.showSort = !this.showSort);
+  //Show or hide options
+  toggleOptions = (option) => {
+    if (option === 'name_opt')
+      return (this.showNameOptions = !this.showNameOptions);
+    if (option === 'price_opt')
+      return (this.showPriceOptions = !this.showPriceOptions);
+    if (option === 'motortype_opt')
+      return (this.showMotortypeOptions = !this.showMotortypeOptions);
   };
 
   sortModels = (sortType) => {
     sortModelsByPrice(sortType);
+
+    //Show notification that some of options were chosen
+    if (sortType === 'asc') {
+      this.lockAscPriceOptions = true;
+      this.lockDescPriceOptions = false;
+    }
+    if (sortType === 'desc') {
+      this.lockAscPriceOptions = false;
+      this.lockDescPriceOptions = true;
+    }
   };
 }
 

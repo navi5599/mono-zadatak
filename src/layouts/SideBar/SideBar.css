@@ -19,6 +19,7 @@
 .search_input {
   margin-top: 5px;
   height: 25px;
+  border: none;
   border-radius: 5px;
 }
 
@@ -33,34 +34,51 @@
   margin-top: 150px;
 }
 
-.filter_section button {
-  cursor: pointer;
-  font: inherit;
-  outline: #141e30;
+.sort_div,
+.filter_div {
+  margin-top: 10px;
   border: none;
-  width: 145px;
-  color: #141e30;
-  font-weight: bold;
-  margin: 10px;
-  height: 28px;
   border-radius: 5px;
+  font-size: smaller;
+  font: inherit;
+  width: 140px;
+  text-align: center;
+  background-color: #253450;
+  cursor: pointer;
+  transition: 0.23s ease-in;
+  height: 30px;
+  overflow: hidden;
 }
 
-.dropdown_filter {
-  background-color: #314974 !important;
-  color: aliceblue !important;
-  transition: all 0.33s ease 0s;
+.show {
+  height: 90px;
+}
+.show_filter {
+  height: 120px;
 }
 
-.dropdown_filter:hover {
-  background-color: #4570c0 !important;
+.sort_div h4 {
+  margin: 5px !important;
 }
 
-.options_button {
-  font-size: small !important;
-  font-weight: 500 !important;
+.options {
+  transition: 0.2s ease-in;
+  padding: 5px;
+  margin: 5px;
 }
 
-.options_button:hover {
-  font-weight: 700 !important;
+.options:hover {
+  color: #253450;
+  background-color: aliceblue;
+}
+
+.confirmed_asc {
+  color: rgb(5, 180, 45) !important;
+}
+
+.icon {
+  background: rgb(40, 57, 44);
+  color: rgb(51, 241, 95);
+  margin-top: 3px;
+  float: right;
 }

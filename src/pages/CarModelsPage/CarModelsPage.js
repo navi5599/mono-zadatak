@@ -9,6 +9,7 @@ import CarModel from '../../components/CarModel/CarModel';
 import Button from '../../components/Button/Button';
 
 function CarModelsPage() {
+  //Use car id from the local storage that we set on click from the home page
   const carId = localStorage.getItem('carId');
 
   useEffect(() => {
@@ -22,7 +23,7 @@ function CarModelsPage() {
         <Button
           value="Go back"
           className="centered_button"
-          onClickHandler={() => (globalStore.setPage = 2)}
+          onClickHandler={() => ''}
         />
       </Link>
 
