@@ -1,20 +1,23 @@
 import axios from 'axios';
+import { runInAction } from 'mobx';
 import globalStore from '../stores/GlobalStore';
 
 //get all cars from api service and save it to the cars array in store
-export const getCarsData = () => {
-  axios
-    .get('https://api.baasic.com/beta/myapp-test/resources/VehicleMake')
-    .then((res) => {
-      globalStore.cars = res.data.item;
-      console.log(res.data.item);
-    })
-    .catch((err) => {
-      console.log(err);
+export const getCarsData = async () => {
+  try {
+    const response = await axios.get(
+      'https://api.baasic.com/beta/myapp-test/resources/VehicleMake'
+    );
+    runInAction(() => {
+      globalStore.cars = response.data.item;
+      console.log(response.data.item);
     });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-//get all car models from api service and save it to the models array in store
+//get all models from api service and save it to the models array in store
 
 export const getModelsData = (id) => {
   let modelsUrl =
@@ -29,10 +32,10 @@ export const getModelsData = (id) => {
     globalStore.showLoadButton = false;
   }
 
-  axios
+  return axios
     .get(modelsUrl)
     .then((res) => {
-      globalStore.models = res.data.item;
+      return res.data.item;
     })
     .catch((err) => {
       console.log(err);
@@ -41,25 +44,26 @@ export const getModelsData = (id) => {
 
 // fetch new models ---
 
-export const getNewModelsData = () => {
+export const getNewModelsData = async () => {
   const currentModels = globalStore.models;
 
   if (currentModels.length < 25) {
-    axios
-      .get(
+    try {
+      const response = await axios.get(
         `https://api.baasic.com/beta/myapp-test/resources/VehicleModel?page=${globalStore.setPage}`
-      )
-      .then((res) => {
-        globalStore.models = [...currentModels, ...res.data.item];
+      );
+      runInAction(() => {
+        globalStore.models = [...currentModels, ...response.data.item];
         console.log('New models added');
-        console.log(globalStore.models);
-      })
-      .catch((err) => {
-        console.log(err);
       });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  globalStore.setPage++;
+  runInAction(() => {
+    globalStore.setPage++;
+  });
 };
 
 //Sort models by name ---
@@ -79,8 +83,29 @@ export const sortModelsByName = (sortType) => {
     .get(url)
     .then((res) => {
       globalStore.models = res.data.item;
-      console.log('sorteditems');
-      console.log(res.data.item);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+//Sort models by motortype ---
+
+export const sortModelsByMotortype = (sortType) => {
+  let url = 'https://api.baasic.com/beta/myapp-test/resources/VehicleModel';
+
+  const carId = localStorage.getItem('carId');
+
+  if (carId === 'all') {
+    url += `?searchQuery=WHERE motortype='${sortType}'`;
+  } else {
+    url += `?searchQuery=WHERE vehiclemakeid ='${carId}' AND motortype='${sortType}'`;
+  }
+
+  axios
+    .get(url)
+    .then((res) => {
+      globalStore.models = res.data.item;
     })
     .catch((err) => {
       console.log(err);

@@ -1,12 +1,27 @@
 .card {
   width: 350px;
-  height: 390px;
+  height: 420px;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   border-radius: 10px;
   transition: ease-in-out 0.23s;
   text-align: center;
   margin-top: 50px;
   margin-bottom: 20px;
+  padding: 15px;
+  overflow: hidden;
+}
+
+.card:hover img {
+  transform: scale(1.17);
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  border-radius: 10px;
+  transition: transform 0.2s ease-in-out;
+  height: auto;
+  margin-bottom: 25px;
 }
 
 .card p {
@@ -20,11 +35,6 @@
   margin-top: 50px;
 }
 
-img {
-  max-width: 330px;
-  border-radius: 10px;
-}
-
 .car_model_container {
   height: 100%;
   display: -ms-grid;
@@ -35,4 +45,8 @@ img {
   width: 60%;
   margin: 0 auto;
   margin-bottom: 100px;
+}
+
+.no_models_header {
+  text-align: center;
 }

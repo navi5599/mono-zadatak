@@ -1,6 +1,8 @@
 import { observable, action, makeObservable } from 'mobx';
 import globalStore from '../common/stores/GlobalStore';
 
+import { sortModelsByMotortype } from '../common/services/fetchApiData';
+
 //Helper function to sort models by price
 const sortModelsByPrice = (sortType) => {
   const currentModels = globalStore.models;
@@ -29,6 +31,10 @@ class SideBarStore {
   lockAscPriceOptions = false;
   lockDescPriceOptions = false;
 
+  lockBenzinOption = false;
+  lockDieselOption = false;
+  lockHybridOption = false;
+
   constructor() {
     makeObservable(this, {
       searchedCar: observable,
@@ -37,6 +43,10 @@ class SideBarStore {
       lockAscPriceOptions: observable,
       lockDescPriceOptions: observable,
       showMotortypeOptions: observable,
+      lockBenzinOption: observable,
+      lockDieselOption: observable,
+      lockHybridOption: observable,
+      sortByMotortype: action,
       sortModels: action,
       toggleOptions: action,
     });
@@ -63,6 +73,27 @@ class SideBarStore {
     if (sortType === 'desc') {
       this.lockAscPriceOptions = false;
       this.lockDescPriceOptions = true;
+    }
+  };
+
+  sortByMotortype = (sortType) => {
+    sortModelsByMotortype(sortType);
+
+    //Show notification that some of options were chosen
+    if (sortType === 'Benzin') {
+      this.lockBenzinOption = true;
+      this.lockDieselOption = false;
+      this.lockHybridOption = false;
+    }
+    if (sortType === 'Diesel') {
+      this.lockBenzinOption = false;
+      this.lockDieselOption = true;
+      this.lockHybridOption = false;
+    }
+    if (sortType === 'Hybrid') {
+      this.lockBenzinOption = false;
+      this.lockDieselOption = false;
+      this.lockHybridOption = true;
     }
   };
 }

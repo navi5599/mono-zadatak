@@ -102,9 +102,10 @@ function SideBar() {
           }`}
         >
           <h4>
-            By MotorType{' '}
-            {sidebarStore.lockAscPriceOptions ||
-            sidebarStore.lockDescPriceOptions ? (
+            By Motortype{' '}
+            {sidebarStore.lockBenzinOption ||
+            sidebarStore.lockDieselOption ||
+            sidebarStore.lockHybridOption ? (
               <AiFillCheckSquare className="icon" />
             ) : (
               ''
@@ -113,25 +114,25 @@ function SideBar() {
           {sidebarStore.showMotortypeOptions ? (
             <>
               <h5
-                onClick={() => sidebarStore.sortModels('benzin')}
+                onClick={() => sidebarStore.sortByMotortype('Benzin')}
                 className={`options ${
-                  sidebarStore.lockAscPriceOptions ? 'confirmed_asc' : ''
+                  sidebarStore.lockBenzinOption ? 'confirmed_asc' : ''
                 }`}
               >
                 Benzin
               </h5>
               <h5
-                onClick={() => sidebarStore.sortModels('diesel')}
+                onClick={() => sidebarStore.sortByMotortype('Diesel')}
                 className={`options ${
-                  sidebarStore.lockDescPriceOptions ? 'confirmed_asc' : ''
+                  sidebarStore.lockDieselOption ? 'confirmed_asc' : ''
                 }`}
               >
                 Diesel
               </h5>
               <h5
-                onClick={() => sidebarStore.sortModels('hybrid')}
+                onClick={() => sidebarStore.sortByMotortype('Hybrid')}
                 className={`options ${
-                  sidebarStore.lockDescPriceOptions ? 'confirmed_asc' : ''
+                  sidebarStore.lockHybridOption ? 'confirmed_asc' : ''
                 }`}
               >
                 Hybrid
