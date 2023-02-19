@@ -1,4 +1,10 @@
-import { observable, action, makeObservable, runInAction } from 'mobx';
+import {
+  observable,
+  action,
+  makeObservable,
+  runInAction,
+  computed,
+} from 'mobx';
 import { getCarsData } from '../services/fetchApiData';
 import { getModelsData } from '../services/fetchApiData';
 import { getNewModelsData } from '../services/fetchApiData';
@@ -28,6 +34,15 @@ class GlobalStore {
       getNewModels: action,
       getModelsByName: action,
       resetStates: action,
+      filteredModels: computed,
+    });
+  }
+
+  get filteredModels() {
+    return this.models.filter((car) => {
+      return sidebarStore.searchedCar.toLowerCase() === ''
+        ? car
+        : car.name.toLowerCase().includes(sidebarStore.searchedCar);
     });
   }
 

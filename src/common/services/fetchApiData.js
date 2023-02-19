@@ -68,46 +68,49 @@ export const getNewModelsData = async () => {
 
 //Sort models by name ---
 
-export const sortModelsByName = (sortType) => {
+export const sortModelsByName = async (sortType) => {
   let url = 'https://api.baasic.com/beta/myapp-test/resources/VehicleModel';
 
   const carId = localStorage.getItem('carId');
 
-  if (carId === 'all') {
-    url += `?sort=name|${sortType}`;
-  } else {
-    url += `?searchQuery=WHERE vehiclemakeid ='${carId}'&sort=name|${sortType}`;
-  }
+  try {
+    if (carId === 'all') {
+      url += `?sort=name|${sortType}`;
+    } else {
+      url += `?searchQuery=WHERE vehiclemakeid ='${carId}'&sort=name|${sortType}`;
+    }
 
-  axios
-    .get(url)
-    .then((res) => {
-      globalStore.models = res.data.item;
-    })
-    .catch((err) => {
-      console.log(err);
+    const response = await axios.get(url);
+    runInAction(() => {
+      globalStore.models = response.data.item;
+      console.log('Models have been sorted');
     });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 //Sort models by motortype ---
 
-export const sortModelsByMotortype = (sortType) => {
+export const sortModelsByMotortype = async (sortType) => {
   let url = 'https://api.baasic.com/beta/myapp-test/resources/VehicleModel';
 
   const carId = localStorage.getItem('carId');
 
-  if (carId === 'all') {
-    url += `?searchQuery=WHERE motortype='${sortType}'`;
-  } else {
-    url += `?searchQuery=WHERE vehiclemakeid ='${carId}' AND motortype='${sortType}'`;
-  }
+  try {
+    if (carId === 'all') {
+      url += `?searchQuery=WHERE motortype='${sortType}'`;
+    } else {
+      url += `?searchQuery=WHERE vehiclemakeid ='${carId}' AND motortype='${sortType}'`;
+    }
 
-  axios
-    .get(url)
-    .then((res) => {
-      globalStore.models = res.data.item;
-    })
-    .catch((err) => {
-      console.log(err);
+    const response = await axios.get(url);
+
+    runInAction(() => {
+      globalStore.models = response.data.item;
+      console.log('Models have been sorted');
     });
+  } catch (error) {
+    console.log(error);
+  }
 };

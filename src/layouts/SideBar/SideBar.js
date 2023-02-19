@@ -1,6 +1,7 @@
 import React from 'react';
 import { AiFillCheckSquare } from 'react-icons/ai';
 import { observer } from 'mobx-react-lite';
+import { action } from 'mobx';
 
 import sidebarStore from '../../stores/SideBarStore';
 import globalStore from '../../common/stores/GlobalStore';
@@ -8,13 +9,14 @@ import globalStore from '../../common/stores/GlobalStore';
 import './SideBar.css';
 
 function SideBar() {
+  const handleSearchChange = action((e) => {
+    sidebarStore.searchedCar = e.target.value;
+  });
+
   return (
     <div className="sidebar">
       <h4>Search</h4>
-      <input
-        className="search_input"
-        onChange={(e) => (sidebarStore.searchedCar = e.target.value)}
-      ></input>
+      <input className="search_input" onChange={handleSearchChange}></input>
       <div className="filter_section">
         <h4>Sort</h4>
         <div
