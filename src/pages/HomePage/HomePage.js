@@ -38,16 +38,20 @@ function HomePage() {
         );
       })}
 
-      <div className="models_card">
-        <h4>All Models</h4>
-        <Link to="/models">
-          <Button
-            className="allmodels_btn"
-            value={'All models'}
-            onClickHandler={() => localStorage.setItem('carId', 'all')}
-          />
-        </Link>
-      </div>
+      {globalStore.cars.length === 0 ? (
+        <h4 className="loading">Loading..</h4>
+      ) : (
+        <div className="models_card all_models_card">
+          <h4>All Models</h4>
+          <Link to="/models">
+            <Button
+              className="allmodels_btn"
+              value={'All models'}
+              onClickHandler={() => localStorage.setItem('carId', 'all')}
+            />
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
