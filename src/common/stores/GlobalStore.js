@@ -1,10 +1,4 @@
-import {
-  observable,
-  action,
-  makeObservable,
-  runInAction,
-  computed,
-} from 'mobx';
+import { observable, action, makeObservable, computed, flow } from 'mobx';
 import { getCarsData } from '../services/fetchApiData';
 import { getModelsData } from '../services/fetchApiData';
 import { getNewModelsData } from '../services/fetchApiData';
@@ -29,10 +23,10 @@ class GlobalStore {
       setPage: observable,
       lockAscOptions: observable,
       lockDescOptions: observable,
-      getCars: action,
-      getModels: action,
-      getNewModels: action,
-      getModelsByName: action,
+      getCars: flow,
+      getModels: flow,
+      getNewModels: flow,
+      getModelsByName: flow,
       resetStates: action,
       filteredModels: computed,
     });
@@ -46,34 +40,34 @@ class GlobalStore {
     });
   }
 
-  getCars = () => {
-    getCarsData();
-  };
+  *getCars() {
+    const cars = yield getCarsData();
+    this.cars = cars;
+    console.log('get cars called');
+  }
 
-  getModels = async (id) => {
-    const models = await getModelsData(id);
-    runInAction(() => {
-      this.models = models;
-    });
-  };
+  *getModels(id) {
+    const models = yield getModelsData(id);
+    this.models = models;
+  }
 
   getNewModels = () => {
     getNewModelsData();
   };
 
-  getModelsByName = (sortType) => {
-    runInAction(() => {
-      sortModelsByName(sortType);
-      if (sortType === 'asc') {
-        this.lockAscOptions = true;
-        this.lockDescOptions = false;
-      }
-      if (sortType === 'desc') {
-        this.lockAscOptions = false;
-        this.lockDescOptions = true;
-      }
-    });
-  };
+  *getModelsByName(sortType) {
+    const response = yield sortModelsByName(sortType);
+    this.models = response;
+
+    if (sortType === 'asc') {
+      this.lockAscOptions = true;
+      this.lockDescOptions = false;
+    }
+    if (sortType === 'desc') {
+      this.lockAscOptions = false;
+      this.lockDescOptions = true;
+    }
+  }
 
   resetStates = () => {
     this.setPage = 2;

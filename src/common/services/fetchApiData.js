@@ -3,18 +3,15 @@ import { runInAction } from 'mobx';
 import globalStore from '../stores/GlobalStore';
 
 //get all cars from api service and save it to the cars array in store
-export const getCarsData = async () => {
-  try {
-    const response = await axios.get(
-      'https://api.baasic.com/beta/myapp-test/resources/VehicleMake'
-    );
-    runInAction(() => {
-      globalStore.cars = response.data.item;
-      console.log(response.data.item);
+export const getCarsData = () => {
+  return axios
+    .get('https://api.baasic.com/beta/myapp-test/resources/VehicleMake')
+    .then((res) => {
+      return res.data.item;
+    })
+    .catch((err) => {
+      console.log(err);
     });
-  } catch (error) {
-    console.log(error);
-  }
 };
 
 //get all models from api service and save it to the models array in store
@@ -68,49 +65,40 @@ export const getNewModelsData = async () => {
 
 //Sort models by name ---
 
-export const sortModelsByName = async (sortType) => {
+export const sortModelsByName = (sortType) => {
   let url = 'https://api.baasic.com/beta/myapp-test/resources/VehicleModel';
 
   const carId = localStorage.getItem('carId');
 
-  try {
-    if (carId === 'all') {
-      url += `?sort=name|${sortType}`;
-    } else {
-      url += `?searchQuery=WHERE vehiclemakeid ='${carId}'&sort=name|${sortType}`;
-    }
-
-    const response = await axios.get(url);
-    runInAction(() => {
-      globalStore.models = response.data.item;
-      console.log('Models have been sorted');
-    });
-  } catch (error) {
-    console.log(error);
+  if (carId === 'all') {
+    url += `?sort=name|${sortType}`;
+  } else {
+    url += `?searchQuery=WHERE vehiclemakeid ='${carId}'&sort=name|${sortType}`;
   }
+
+  return axios
+    .get(url)
+    .then((response) => response.data.item)
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 //Sort models by motortype ---
 
-export const sortModelsByMotortype = async (sortType) => {
+export const sortModelsByMotortype = (sortType) => {
   let url = 'https://api.baasic.com/beta/myapp-test/resources/VehicleModel';
 
   const carId = localStorage.getItem('carId');
 
-  try {
-    if (carId === 'all') {
-      url += `?searchQuery=WHERE motortype='${sortType}'`;
-    } else {
-      url += `?searchQuery=WHERE vehiclemakeid ='${carId}' AND motortype='${sortType}'`;
-    }
-
-    const response = await axios.get(url);
-
-    runInAction(() => {
-      globalStore.models = response.data.item;
-      console.log('Models have been sorted');
-    });
-  } catch (error) {
-    console.log(error);
+  if (carId === 'all') {
+    url += `?searchQuery=WHERE motortype='${sortType}'`;
+  } else {
+    url += `?searchQuery=WHERE vehiclemakeid ='${carId}' AND motortype='${sortType}'`;
   }
+
+  return axios
+    .get(url)
+    .then((res) => res.data.item)
+    .catch((err) => console.log(err));
 };
