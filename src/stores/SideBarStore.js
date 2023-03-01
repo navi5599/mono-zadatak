@@ -1,4 +1,4 @@
-import { observable, action, makeObservable } from 'mobx';
+import { observable, action, makeObservable, flow, runInAction } from 'mobx';
 import globalStore from '../common/stores/GlobalStore';
 
 import { sortModelsByMotortype } from '../common/services/fetchApiData';
@@ -46,7 +46,7 @@ class SideBarStore {
       lockBenzinOption: observable,
       lockDieselOption: observable,
       lockHybridOption: observable,
-      sortByMotortype: action,
+      sortByMotortype: flow,
       sortModels: action,
       toggleOptions: action,
     });
@@ -76,8 +76,11 @@ class SideBarStore {
     }
   };
 
-  sortByMotortype = (sortType) => {
-    sortModelsByMotortype(sortType);
+  *sortByMotortype(sortType) {
+    const response = yield sortModelsByMotortype(sortType);
+    runInAction(() => {
+      globalStore.models = response;
+    });
 
     //Show notification that some of options were chosen
     if (sortType === 'Benzin') {
@@ -95,7 +98,7 @@ class SideBarStore {
       this.lockDieselOption = false;
       this.lockHybridOption = true;
     }
-  };
+  }
 }
 
 const sidebarStore = new SideBarStore();
