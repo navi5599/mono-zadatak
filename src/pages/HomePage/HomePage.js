@@ -19,17 +19,14 @@ function HomePage() {
         return (
           <Link
             key={car.id}
-            to="/models"
+            to={`/models/${car.id}`}
             style={{
               textDecoration: 'none',
               color: 'inherit',
               height: '150px',
             }}
           >
-            <div
-              className="models_card"
-              onClick={() => localStorage.setItem('carId', car.id)}
-            >
+            <div className="models_card">
               <h4>{car.abbrv}</h4>
 
               <img className="logo_image" src={car.logo} alt="cars"></img>
@@ -43,12 +40,8 @@ function HomePage() {
       ) : (
         <div className="models_card all_models_card">
           <h4>All Models</h4>
-          <Link to="/models">
-            <Button
-              className="allmodels_btn"
-              value={'All models'}
-              onClickHandler={() => localStorage.setItem('carId', 'all')}
-            />
+          <Link to={`/models/${'all'}`}>
+            <Button className="allmodels_btn" value={'All models'} />
           </Link>
         </div>
       )}

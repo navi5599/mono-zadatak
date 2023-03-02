@@ -12,7 +12,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route index element={<HomePage />} />
-        <Route path="models" element={<CarModelsPage />} />
+        <Route path="models/:carId" element={<CarModelsPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>

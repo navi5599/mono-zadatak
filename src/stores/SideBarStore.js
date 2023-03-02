@@ -1,4 +1,4 @@
-import { observable, action, makeObservable, flow, runInAction } from 'mobx';
+import { observable, action, makeObservable, flow } from 'mobx';
 import globalStore from '../common/stores/GlobalStore';
 
 import { sortModelsByMotortype } from '../common/services/fetchApiData';
@@ -76,11 +76,10 @@ class SideBarStore {
     }
   };
 
-  *sortByMotortype(sortType) {
-    const response = yield sortModelsByMotortype(sortType);
-    runInAction(() => {
-      globalStore.models = response;
-    });
+  *sortByMotortype(carId, sortType) {
+    const response = yield sortModelsByMotortype(carId, sortType);
+
+    globalStore.models = response;
 
     //Show notification that some of options were chosen
     if (sortType === 'Benzin') {
