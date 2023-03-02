@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './CarModelsPage.css';
 
 import globalStore from '../../common/stores/GlobalStore';
@@ -10,7 +10,7 @@ import Button from '../../components/Button/Button';
 
 function CarModelsPage() {
   //Use car id from the local storage that we set on click from the home page
-  const carId = localStorage.getItem('carId');
+  const { carId } = useParams();
 
   useEffect(() => {
     globalStore.getModels(carId);

@@ -55,8 +55,8 @@ class GlobalStore {
     getNewModelsData();
   };
 
-  *getModelsByName(sortType) {
-    const response = yield sortModelsByName(sortType);
+  *getModelsByName(carId, sortType) {
+    const response = yield sortModelsByName(carId, sortType);
     this.models = response;
 
     if (sortType === 'asc') {

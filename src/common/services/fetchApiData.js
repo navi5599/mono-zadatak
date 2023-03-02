@@ -65,10 +65,8 @@ export const getNewModelsData = async () => {
 
 //Sort models by name ---
 
-export const sortModelsByName = (sortType) => {
+export const sortModelsByName = (carId, sortType) => {
   let url = 'https://api.baasic.com/beta/myapp-test/resources/VehicleModel';
-
-  const carId = localStorage.getItem('carId');
 
   if (carId === 'all') {
     url += `?sort=name|${sortType}`;
@@ -86,10 +84,8 @@ export const sortModelsByName = (sortType) => {
 
 //Sort models by motortype ---
 
-export const sortModelsByMotortype = (sortType) => {
+export const sortModelsByMotortype = (carId, sortType) => {
   let url = 'https://api.baasic.com/beta/myapp-test/resources/VehicleModel';
-
-  const carId = localStorage.getItem('carId');
 
   if (carId === 'all') {
     url += `?searchQuery=WHERE motortype='${sortType}'`;

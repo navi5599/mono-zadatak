@@ -1,14 +1,18 @@
 import React from 'react';
-import { AiFillCheckSquare } from 'react-icons/ai';
+
 import { observer } from 'mobx-react-lite';
 import { action } from 'mobx';
 
 import sidebarStore from '../../stores/SideBarStore';
 import globalStore from '../../common/stores/GlobalStore';
 
+import { AiFillCheckSquare } from 'react-icons/ai';
 import './SideBar.css';
+import { useParams } from 'react-router-dom';
 
 function SideBar() {
+  const { carId } = useParams();
+
   const handleSearchChange = action((e) => {
     sidebarStore.searchedCar = e.target.value;
   });
@@ -36,7 +40,7 @@ function SideBar() {
           {sidebarStore.showNameOptions ? (
             <>
               <h5
-                onClick={() => globalStore.getModelsByName('asc')}
+                onClick={() => globalStore.getModelsByName(carId, 'asc')}
                 className={`options ${
                   globalStore.lockAscOptions ? 'confirmed_asc' : ''
                 }`}
@@ -44,7 +48,7 @@ function SideBar() {
                 Ascending
               </h5>
               <h5
-                onClick={() => globalStore.getModelsByName('desc')}
+                onClick={() => globalStore.getModelsByName(carId, 'desc')}
                 className={`options ${
                   globalStore.lockDescOptions ? 'confirmed_asc' : ''
                 }`}
@@ -116,7 +120,7 @@ function SideBar() {
           {sidebarStore.showMotortypeOptions ? (
             <>
               <h5
-                onClick={() => sidebarStore.sortByMotortype('Benzin')}
+                onClick={() => sidebarStore.sortByMotortype(carId, 'Benzin')}
                 className={`options ${
                   sidebarStore.lockBenzinOption ? 'confirmed_asc' : ''
                 }`}
@@ -124,7 +128,7 @@ function SideBar() {
                 Benzin
               </h5>
               <h5
-                onClick={() => sidebarStore.sortByMotortype('Diesel')}
+                onClick={() => sidebarStore.sortByMotortype(carId, 'Diesel')}
                 className={`options ${
                   sidebarStore.lockDieselOption ? 'confirmed_asc' : ''
                 }`}
@@ -132,7 +136,7 @@ function SideBar() {
                 Diesel
               </h5>
               <h5
-                onClick={() => sidebarStore.sortByMotortype('Hybrid')}
+                onClick={() => sidebarStore.sortByMotortype(carId, 'Hybrid')}
                 className={`options ${
                   sidebarStore.lockHybridOption ? 'confirmed_asc' : ''
                 }`}
