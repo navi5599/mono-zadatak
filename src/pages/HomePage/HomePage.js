@@ -29,7 +29,15 @@ function HomePage() {
             <div className="models_card">
               <h4>{car.abbrv}</h4>
 
-              <img className="logo_image" src={car.logo} alt="cars"></img>
+              <img
+                className="logo_image"
+                src={
+                  car.logo === ''
+                    ? 'https://i.postimg.cc/6p7YByyN/Untitled-design-1.png'
+                    : car.logo
+                }
+                alt="cars"
+              ></img>
             </div>
           </Link>
         );
@@ -65,7 +73,7 @@ function HomePage() {
             }}
           >
             <div className="models_card all_models_card">
-              <h4>Add new Brand</h4>
+              <h4>Create new Brand</h4>
               <img
                 className="logo_image"
                 src="https://i.postimg.cc/d0jdFYmY/Untitled-design.png"
