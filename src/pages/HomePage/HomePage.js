@@ -38,12 +38,42 @@ function HomePage() {
       {globalStore.cars.length === 0 ? (
         <h4 className="loading">Loading..</h4>
       ) : (
-        <div className="models_card all_models_card">
-          <h4>All Models</h4>
-          <Link to={`/models/${'all'}`}>
-            <Button className="allmodels_btn" value={'All models'} />
+        <>
+          <Link
+            to={`/models/${'all'}`}
+            style={{
+              textDecoration: 'none',
+              color: 'inherit',
+              height: '150px',
+            }}
+          >
+            <div className="models_card all_models_card">
+              <h4>All Models</h4>
+              <img
+                className="logo_image"
+                src="https://i.postimg.cc/6p7YByyN/Untitled-design-1.png"
+                alt="cars"
+              ></img>
+            </div>
           </Link>
-        </div>
+          <Link
+            to={`/createCarBrand`}
+            style={{
+              textDecoration: 'none',
+              color: 'inherit',
+              height: '150px',
+            }}
+          >
+            <div className="models_card all_models_card">
+              <h4>Add new Brand</h4>
+              <img
+                className="logo_image"
+                src="https://i.postimg.cc/d0jdFYmY/Untitled-design.png"
+                alt="cars"
+              ></img>
+            </div>
+          </Link>
+        </>
       )}
     </div>
   );
