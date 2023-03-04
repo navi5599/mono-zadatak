@@ -5,7 +5,7 @@ import globalStore from '../stores/GlobalStore';
 //get all cars from api service and save it to the cars array in store
 export const getCarsData = () => {
   return axios
-    .get('https://api.baasic.com/beta/myapp-test/resources/VehicleMake')
+    .get('https://api.baasic.com/v1/myapp-test/resources/VehicleMake')
     .then((res) => {
       return res.data.item;
     })
@@ -17,11 +17,10 @@ export const getCarsData = () => {
 //get all models from api service and save it to the models array in store
 
 export const getModelsData = (id) => {
-  let modelsUrl =
-    'https://api.baasic.com/beta/myapp-test/resources/VehicleModel';
+  let modelsUrl = 'https://api.baasic.com/v1/myapp-test/resources/VehicleModel';
 
   if (id === 'all') {
-    modelsUrl = 'https://api.baasic.com/beta/myapp-test/resources/VehicleModel';
+    modelsUrl = 'https://api.baasic.com/v1/myapp-test/resources/VehicleModel';
     //Show the load more button, because we got more than 5 models to show
     globalStore.showLoadButton = true;
   } else {
@@ -47,7 +46,7 @@ export const getNewModelsData = async () => {
   if (currentModels.length < 25) {
     try {
       const response = await axios.get(
-        `https://api.baasic.com/beta/myapp-test/resources/VehicleModel?page=${globalStore.setPage}`
+        `https://api.baasic.com/v1/myapp-test/resources/VehicleModel?page=${globalStore.setPage}`
       );
       runInAction(() => {
         globalStore.models = [...currentModels, ...response.data.item];
@@ -66,7 +65,7 @@ export const getNewModelsData = async () => {
 //Sort models by name ---
 
 export const sortModelsByName = (carId, sortType) => {
-  let url = 'https://api.baasic.com/beta/myapp-test/resources/VehicleModel';
+  let url = 'https://api.baasic.com/v1/myapp-test/resources/VehicleModel';
 
   if (carId === 'all') {
     url += `?sort=name|${sortType}`;
@@ -85,7 +84,7 @@ export const sortModelsByName = (carId, sortType) => {
 //Sort models by motortype ---
 
 export const sortModelsByMotortype = (carId, sortType) => {
-  let url = 'https://api.baasic.com/beta/myapp-test/resources/VehicleModel';
+  let url = 'https://api.baasic.com/v1/myapp-test/resources/VehicleModel';
 
   if (carId === 'all') {
     url += `?searchQuery=WHERE motortype='${sortType}'`;
