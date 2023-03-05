@@ -1,8 +1,7 @@
 import { toast } from 'react-toastify';
 
-//Notify
-export const notifySuccess = () =>
-  toast.success('Brand added, you will be redirected to homepage', {
+export const notifySuccess = (msg) =>
+  toast.success(`${msg}`, {
     position: 'bottom-center',
     autoClose: 5000,
     hideProgressBar: false,

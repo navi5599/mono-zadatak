@@ -73,7 +73,7 @@ function HomePage() {
             }}
           >
             <div className="models_card all_models_card">
-              <h4>Create new Brand</h4>
+              <h4>Add new Brand</h4>
               <img
                 className="logo_image"
                 src="https://i.postimg.cc/d0jdFYmY/Untitled-design.png"

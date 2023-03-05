@@ -27,7 +27,7 @@ function App() {
           element={token ? <Navigate to="/" /> : <Login />}
         />
         <Route
-          path="models/:carId"
+          path="/models/:carId"
           element={!token ? <Navigate to="/welcome" /> : <CarModelsPage />}
         />
         <Route path="/createCarBrand" element={<AddCarPage />} />

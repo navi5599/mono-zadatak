@@ -12,5 +12,9 @@
   background: linear-gradient(to right, #141e30, #243b55);
 
   text-shadow: rgb(0 0 0 / 25%) 0px 3px 8px;
-  transition: all 0.5s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.btn:hover {
+  transform: scale(1.15);
 }

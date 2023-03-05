@@ -1,4 +1,4 @@
-import { observable, action, makeObservable, flow } from 'mobx';
+import { observable, action, makeObservable, flow, runInAction } from 'mobx';
 import globalStore from '../common/stores/GlobalStore';
 
 import { sortModelsByMotortype } from '../common/services/fetchApiData';
@@ -35,6 +35,8 @@ class SideBarStore {
   lockDieselOption = false;
   lockHybridOption = false;
 
+  showAddModel = false;
+
   constructor() {
     makeObservable(this, {
       searchedCar: observable,
@@ -46,11 +48,19 @@ class SideBarStore {
       lockBenzinOption: observable,
       lockDieselOption: observable,
       lockHybridOption: observable,
+      showAddModel: observable,
       sortByMotortype: flow,
       sortModels: action,
       toggleOptions: action,
+      handleModal: action,
     });
   }
+
+  handleModal = () => {
+    runInAction(() => {
+      this.showAddModel = !this.showAddModel;
+    });
+  };
 
   //Show or hide options
   toggleOptions = (option) => {
