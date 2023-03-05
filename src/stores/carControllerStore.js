@@ -6,12 +6,23 @@ class CarControllerStore {
   description = '';
   logo = '';
 
+  modelName = '';
+  image = '';
+  motortype = '';
+  horsepower = '';
+  price = '';
+
   constructor() {
     makeObservable(this, {
       name: observable,
+      modelName: observable,
       abbrv: observable,
       description: observable,
       logo: observable,
+      image: observable,
+      motortype: observable,
+      horsepower: observable,
+      price: observable,
     });
   }
 }

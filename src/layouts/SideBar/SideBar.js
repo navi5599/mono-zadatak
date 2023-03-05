@@ -21,6 +21,11 @@ function SideBar() {
     <div className="sidebar">
       <h4>Search</h4>
       <input className="search_input" onChange={handleSearchChange}></input>
+
+      <h4 className="add_new_model" onClick={sidebarStore.handleModal}>
+        Add new Model
+      </h4>
+
       <div className="filter_section">
         <h4>Sort</h4>
         <div

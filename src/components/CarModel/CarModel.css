@@ -1,6 +1,6 @@
 .card {
   width: 350px;
-  height: 420px;
+  height: 440px;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   border-radius: 10px;
   transition: ease-in-out 0.23s;
@@ -11,7 +11,7 @@
   overflow: hidden;
 }
 
-.card:hover img {
+.card img:hover {
   transform: scale(1.17);
   cursor: pointer;
 }
@@ -49,4 +49,32 @@ img {
 
 .no_models_header {
   text-align: center;
+}
+
+.card_footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.card_options,
+.card_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+.card_info {
+  text-align: left;
+}
+
+.red_btn {
+  background: linear-gradient(to right, #8b2020, #c93939);
+  border: none;
+}
+
+span {
+  font-weight: bold;
 }
