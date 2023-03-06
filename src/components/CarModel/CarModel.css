@@ -49,6 +49,7 @@ img {
 
 .no_models_header {
   text-align: center;
+  margin-top: 100px;
 }
 
 .card_footer {
@@ -68,11 +69,6 @@ img {
 
 .card_info {
   text-align: left;
-}
-
-.red_btn {
-  background: linear-gradient(to right, #8b2020, #c93939);
-  border: none;
 }
 
 span {

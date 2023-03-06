@@ -52,6 +52,13 @@
   overflow: hidden;
 }
 
+.sidebar p {
+  margin-top: 10px;
+  font-size: x-small;
+  text-align: center;
+  color: rgb(236, 255, 127);
+}
+
 .show {
   height: 90px;
 }
@@ -104,4 +111,10 @@
 
 .add_new_model:hover {
   background-color: #3a883c;
+}
+
+.disabled {
+  background-color: #767776;
+  cursor: default;
+  pointer-events: none;
 }
