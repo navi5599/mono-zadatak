@@ -23,7 +23,7 @@ function AddCarPage() {
           type="name"
           id="name"
           name="name"
-          onChange={(e) => (carControllerStore.name = e.target.value)}
+          onChange={(e) => (carControllerStore.brandName = e.target.value)}
         />
         <br></br>
 

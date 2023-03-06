@@ -18,3 +18,8 @@
 .btn:hover {
   transform: scale(1.15);
 }
+
+.red_btn {
+  background: linear-gradient(to right, #8b2020, #c93939);
+  border: none;
+}

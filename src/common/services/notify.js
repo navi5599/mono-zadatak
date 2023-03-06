@@ -9,7 +9,7 @@ export const notifySuccess = (msg) =>
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: 'light',
+    theme: 'dark',
   });
 
 export const notifyError = (err) =>
@@ -21,5 +21,5 @@ export const notifyError = (err) =>
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: 'light',
+    theme: 'dark',
   });

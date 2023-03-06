@@ -1,12 +1,12 @@
 import { makeObservable, observable } from 'mobx';
 
 class CarControllerStore {
-  name = '';
+  brandName = '';
   abbrv = '';
   description = '';
   logo = '';
 
-  modelName = '';
+  name = '';
   image = '';
   motortype = '';
   horsepower = '';
@@ -15,7 +15,7 @@ class CarControllerStore {
   constructor() {
     makeObservable(this, {
       name: observable,
-      modelName: observable,
+      brandName: observable,
       abbrv: observable,
       description: observable,
       logo: observable,

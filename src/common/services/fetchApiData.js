@@ -43,13 +43,20 @@ export const getModelsData = (id) => {
 export const getNewModelsData = async () => {
   const currentModels = globalStore.models;
 
-  if (currentModels.length < 25) {
+  // Make initial API call to get total number of models
+  const response = await axios.get(
+    'https://api.baasic.com/v1/myapp-test/resources/VehicleModel'
+  );
+  const totalCount = response.data.totalRecords;
+
+  if (currentModels.length < totalCount) {
     try {
       const response = await axios.get(
         `https://api.baasic.com/v1/myapp-test/resources/VehicleModel?page=${globalStore.setPage}`
       );
       runInAction(() => {
-        globalStore.models = [...currentModels, ...response.data.item];
+        const newModels = response.data.item;
+        globalStore.models = [...currentModels, ...newModels];
         console.log('New models added');
       });
     } catch (error) {
@@ -58,7 +65,9 @@ export const getNewModelsData = async () => {
   }
 
   runInAction(() => {
-    globalStore.setPage++;
+    if (currentModels.length < totalCount) {
+      globalStore.setPage++;
+    }
   });
 };
 

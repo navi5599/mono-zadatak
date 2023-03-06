@@ -22,9 +22,20 @@ function SideBar() {
       <h4>Search</h4>
       <input className="search_input" onChange={handleSearchChange}></input>
 
-      <h4 className="add_new_model" onClick={sidebarStore.handleModal}>
+      <h4
+        className={carId === 'all' ? 'add_new_model disabled' : 'add_new_model'}
+        onClick={sidebarStore.handleModal}
+      >
         Add new Model
       </h4>
+
+      {carId === 'all' ? (
+        <p>
+          To add new Model,<br></br>select Car brand from Homepage
+        </p>
+      ) : (
+        ''
+      )}
 
       <div className="filter_section">
         <h4>Sort</h4>
