@@ -23,3 +23,9 @@
   background: linear-gradient(to right, #8b2020, #c93939);
   border: none;
 }
+
+.new_btn {
+  position: absolute;
+  bottom: 65px;
+  left: 50%;
+}

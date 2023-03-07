@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 import './CarModelsPage.css';
 
 import globalStore from '../../common/stores/GlobalStore';
@@ -19,10 +20,21 @@ function CarModelsPage() {
   return (
     <div className="card_models_container">
       <SideBar />
+
+      {globalStore.showLoadButton ? (
+        <Button
+          value="Load more"
+          className="new_btn"
+          onClickHandler={() => globalStore.getNewModels(carId)}
+        />
+      ) : (
+        ''
+      )}
+
       <Link to="/" style={{ textDecoration: 'none' }}>
         <Button
           value="Go back"
-          className="centered_button"
+          className="go_back_button"
           onClickHandler={() => ''}
         />
       </Link>
@@ -32,4 +44,4 @@ function CarModelsPage() {
   );
 }
 
-export default CarModelsPage;
+export default observer(CarModelsPage);

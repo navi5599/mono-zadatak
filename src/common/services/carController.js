@@ -27,6 +27,11 @@ export const createNewBrand = async () => {
     carControllerStore.logo = '';
   };
 
+  if (carControllerStore.brandName === '' || carControllerStore.abbrv === '') {
+    notifyError('Name and Abbreviation are required');
+    return;
+  }
+
   const headers = {
     headers: {
       'Content-Type': 'application/json',
@@ -50,6 +55,7 @@ export const createNewBrand = async () => {
     }
   } catch (err) {
     console.log(err);
+    notifyError();
   }
 };
 
@@ -67,6 +73,11 @@ export const createNewModel = async (carId) => {
     price: carControllerStore.price,
     vehiclemakeid: carId,
   };
+
+  if (carControllerStore.name === '') {
+    notifyError('Model name is required');
+    return;
+  }
 
   const resetData = () => {
     Object.keys(data).forEach((key) => {
@@ -135,6 +146,7 @@ export const updateModel = async (
       console.log('Model updated', response);
       notifySuccess('Model successfully updated');
       globalStore.getModels(carId);
+      //Remove editing card
       handleCancelEditClick();
     } else {
       console.log('Error:', response.status);

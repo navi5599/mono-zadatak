@@ -19,19 +19,14 @@ export const getCarsData = () => {
 export const getModelsData = (id) => {
   let modelsUrl = 'https://api.baasic.com/v1/myapp-test/resources/VehicleModel';
 
-  if (id === 'all') {
-    modelsUrl = 'https://api.baasic.com/v1/myapp-test/resources/VehicleModel';
-    //Show the load more button, because we got more than 5 models to show
-    globalStore.showLoadButton = true;
-  } else {
+  if (id !== 'all') {
     modelsUrl += `?searchQuery=WHERE vehiclemakeid = '${id}'`;
-    globalStore.showLoadButton = false;
   }
 
   return axios
     .get(modelsUrl)
     .then((res) => {
-      return res.data.item;
+      return res.data;
     })
     .catch((err) => {
       console.log(err);
@@ -40,20 +35,19 @@ export const getModelsData = (id) => {
 
 // fetch new models ---
 
-export const getNewModelsData = async () => {
+export const getNewModelsData = async (carId) => {
   const currentModels = globalStore.models;
+  const totalRecords = globalStore.totalRecords;
 
-  // Make initial API call to get total number of models
-  const response = await axios.get(
-    'https://api.baasic.com/v1/myapp-test/resources/VehicleModel'
-  );
-  const totalCount = response.data.totalRecords;
+  let url = `https://api.baasic.com/v1/myapp-test/resources/VehicleModel?page=${globalStore.setPage}`;
 
-  if (currentModels.length < totalCount) {
+  if (carId !== 'all') {
+    url += `&searchQuery=WHERE vehiclemakeid ='${carId}'`;
+  }
+
+  if (currentModels.length < totalRecords) {
     try {
-      const response = await axios.get(
-        `https://api.baasic.com/v1/myapp-test/resources/VehicleModel?page=${globalStore.setPage}`
-      );
+      const response = await axios.get(url);
       runInAction(() => {
         const newModels = response.data.item;
         globalStore.models = [...currentModels, ...newModels];
@@ -65,7 +59,13 @@ export const getNewModelsData = async () => {
   }
 
   runInAction(() => {
-    if (currentModels.length < totalCount) {
+    if (globalStore.models.length === globalStore.totalRecords) {
+      globalStore.showLoadButton = false;
+    }
+  });
+
+  runInAction(() => {
+    if (currentModels.length < totalRecords) {
       globalStore.setPage++;
     }
   });

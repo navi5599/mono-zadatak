@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { notifyError } from './notify';
 
 import userStore from '../stores/userStore';
 
@@ -9,6 +10,11 @@ export const loginUser = async () => {
   params.append('username', userStore.username);
   params.append('password', userStore.password);
   params.append('grant_type', 'password');
+
+  if (userStore.username === '' || userStore.password === '') {
+    notifyError('Please enter both username and password');
+    return;
+  }
 
   const headers = {
     headers: {
@@ -23,6 +29,7 @@ export const loginUser = async () => {
     localStorage.setItem('token', response.data.access_token);
   } catch (err) {
     console.log(err);
+    notifyError('Username or password incorrect');
   }
 };
 

@@ -1,4 +1,11 @@
-import { observable, action, makeObservable, computed, flow } from 'mobx';
+import {
+  observable,
+  action,
+  makeObservable,
+  computed,
+  flow,
+  runInAction,
+} from 'mobx';
 import { getCarsData } from '../services/fetchApiData';
 import { getModelsData } from '../services/fetchApiData';
 import { getNewModelsData } from '../services/fetchApiData';
@@ -11,6 +18,7 @@ class GlobalStore {
   models = [];
   showLoadButton = false;
   setPage = 2;
+  totalRecords = 0;
 
   lockAscOptions = false;
   lockDescOptions = false;
@@ -23,9 +31,10 @@ class GlobalStore {
       setPage: observable,
       lockAscOptions: observable,
       lockDescOptions: observable,
+      totalRecords: observable,
       getCars: flow,
       getModels: flow,
-      getNewModels: flow,
+      getNewModels: action,
       getModelsByName: flow,
       resetStates: action,
       filteredModels: computed,
@@ -48,11 +57,20 @@ class GlobalStore {
 
   *getModels(id) {
     const models = yield getModelsData(id);
-    this.models = models;
+    this.models = models.item;
+    this.totalRecords = models.totalRecords;
+    runInAction(() => {
+      if (this.models.length >= 10) {
+        this.showLoadButton = true;
+      }
+    });
   }
 
-  getNewModels = () => {
-    getNewModelsData();
+  getNewModels = (carId) => {
+    if (this.models.length === this.totalRecords) {
+      this.showLoadButton = false;
+    }
+    getNewModelsData(carId);
   };
 
   *getModelsByName(carId, sortType) {
